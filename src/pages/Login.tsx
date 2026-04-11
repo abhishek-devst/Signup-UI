@@ -1,8 +1,14 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import API from "../api/api";
 import { AuthContext } from "../context/AuthContext";
 import type { LoginForm } from "../types/auth";
+import AuthLayout from "../components/AuthLayout";
+
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 export default function Login() {
   const auth = useContext(AuthContext);
@@ -13,10 +19,11 @@ export default function Login() {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log("Sending:", form);
+    setLoading(true);
 
     try {
       const res = await API.post("/auth/login", {
@@ -27,33 +34,72 @@ export default function Login() {
       auth?.login(res.data.token);
       navigate("/home");
     } catch (err: any) {
-      console.log(err.response?.data);
       alert(err.response?.data || "Invalid credentials");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+    <AuthLayout>
+      <Card className="shadow-2xl rounded-2xl border-muted">
+        <CardHeader className="space-y-1 text-center">
+          <CardTitle className="text-2xl font-semibold">
+            Welcome back 👋
+          </CardTitle>
+          <CardDescription>
+            Login to your account
+          </CardDescription>
+        </CardHeader>
 
-      <input
-        value={form.email} // ✅ controlled
-        placeholder="Email"
-        onChange={(e) =>
-          setForm({ ...form, email: e.target.value })
-        }
-      />
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-5">
 
-      <input
-        type="password"
-        value={form.password} // ✅ controlled
-        placeholder="Password"
-        onChange={(e) =>
-          setForm({ ...form, password: e.target.value })
-        }
-      />
+            {/* Email */}
+            <div className="space-y-2">
+              <Label>Email</Label>
+              <Input
+                type="email"
+                placeholder="you@example.com"
+                value={form.email}
+                onChange={(e) =>
+                  setForm({ ...form, email: e.target.value })
+                }
+              />
+            </div>
 
-      <button type="submit">Login</button>
-    </form>
+            {/* Password */}
+            <div className="space-y-2">
+              <Label>Password</Label>
+              <Input
+                type="password"
+                placeholder="••••••••"
+                value={form.password}
+                onChange={(e) =>
+                  setForm({ ...form, password: e.target.value })
+                }
+              />
+            </div>
+
+            {/* Button */}
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
+            </Button>
+
+            {/* New Feature 👇 */}
+            <div className="text-center text-sm text-muted-foreground">
+              Don’t have an account?{" "}
+              <Link
+                to="/register"
+                className="text-primary font-medium hover:underline"
+              >
+                Create account
+              </Link>
+            </div>
+
+          </form>
+        </CardContent>
+      </Card>
+    </AuthLayout>
   );
 }
