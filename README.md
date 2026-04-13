@@ -40,7 +40,7 @@ This project focuses on **simplicity, usability, and clean UX** — avoiding clu
 
 ## 🧱 Tech Stack
 
-- **Frontend Framework:** React (Vite)
+- **Frontend Framework:** React (Vite), shadecn
 - **Language:** TypeScript / JavaScript
 - **State Management:** React Context API
 - **HTTP Client:** Axios
