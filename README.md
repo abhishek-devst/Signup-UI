@@ -132,11 +132,17 @@ Make sure:
 
 ---
 
-## 📸 Screens (Optional)
+### 🔐 Login Page
+![Login Page](public/images/screen-1.png)
 
-_Add screenshots here if needed_
+### 📝 Signup Page
+![Signup Page](public/images/screen-2.png)
 
----
+### 🏠 Dashboard
+![Dashboard](public/images/screen-3.png)
+
+### 🛠️ Admin Panel
+![Admin Panel](public/images/screen-4.png)
 
 ## 🤝 Contribution
 
@@ -159,5 +165,4 @@ This project is open-source and available under the MIT License.
 
 **Abhishek Kumar**
 
-- Full Stack Developer (React + .NET + SQL)  
-- Focused on building clean and practical applications  
+- Software Developer (React + .NET + SQL)  
