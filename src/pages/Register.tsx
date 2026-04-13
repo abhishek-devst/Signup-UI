@@ -182,7 +182,6 @@ export default function Register() {
               />
             </div>
 
-            {/* Button */}
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Creating account..." : "Sign Up"}
             </Button>
