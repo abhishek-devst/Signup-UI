@@ -1,10 +1,7 @@
 @tailwind base;
 
-/* @custom-variant dark (&:is(.dark *)); */
 @tailwind components;
 @tailwind utilities;
-
-/* ------------------ YOUR CUSTOM THEME ------------------ */
 
 :root {
   --text: #6b6375;
